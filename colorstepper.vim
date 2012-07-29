@@ -1,15 +1,9 @@
-"  ColorStepper.vim
+" ColorStepper.vim
 "
-"  colorstepper changes colorscheme to the "next" color
-"  saves position in global variable
-"  re-obtains list of schemes every time, so new colors will
-"  be automatically added
+" Cycle easily through vim colorschemes.
 "
-"  extra credit will be awarded to the student who can tell
-"  me why the echo of colors_name works sometimes and sometimes
-"  doesn't
-"
-"  interestingly it now seems to have stopped working entirely
+" Original script by scott-268 (2007)
+" With modifications by _sc_ (2009) and qualiabyte (2012)
 
 function! Load_colors()
         let g:stepcolors = split(globpath(&rtp,"colors/*.vim"),"\n")
@@ -51,6 +45,6 @@ function! Step_color_back()
         unlet mycolors
 endfunction
 
-"nmap <F6> :call Step_color()<CR> <Bar> :echo g:colors_name<CR>
-"nmap <F7> :echo g:colors_name<CR>
-"nmap <S-F6> :call Step_color_back()<CR> <Bar> :echo g:colors_name<CR>
+nmap <unique> <Plug>ColorStepNext :call Step_color()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+nmap <unique> <Plug>ColorStepBack :call Step_color_back()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+nmap <unique> <Plug>ColorStepReload :call Load_colors()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
