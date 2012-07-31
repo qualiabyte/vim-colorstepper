@@ -22,6 +22,8 @@ Modify your .vimrc to use colorstepper:
     nmap <F7> <Plug>ColorStepNext
     nmap <S-F7> <Plug>ColorStepReload
 
+Pathogen users may omit the "source ..." line since colorstepper loads fine as a plugin.
+
 ## Usage
 
 Ok! After reloading vim, you should now be able to:
