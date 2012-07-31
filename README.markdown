@@ -10,19 +10,19 @@ Add colorstepper to your vim directory:
         && cd ~/.vim/bundle \
         && git clone https://github.com/qualiabyte/vim-colorstepper colorstepper
 
-## Setup
-
-Modify your .vimrc to use colorstepper:
+Non-pathogen users should add this to your .vimrc:
 
     " ColorStepper
     source ~/.vim/bundle/colorstepper/colorstepper.vim
 
-    " ColorStepper Keys
-    nmap <F6> <Plug>ColorStepBack
-    nmap <F7> <Plug>ColorStepNext
-    nmap <S-F7> <Plug>ColorStepReload
+## Setup
 
-Pathogen users may omit the "source ..." line since colorstepper loads fine as a plugin.
+You may optionally modify your .vimrc to customize colorstepper's default keymaps:
+
+    " ColorStepper Keys
+    nmap <F6> <Plug>ColorstepPrev
+    nmap <F7> <Plug>ColorstepNext
+    nmap <S-F7> <Plug>ColorstepReload
 
 ## Usage
 
