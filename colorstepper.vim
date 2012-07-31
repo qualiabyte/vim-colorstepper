@@ -45,6 +45,16 @@ function! Step_color_back()
         unlet mycolors
 endfunction
 
-nmap <unique> <Plug>ColorStepNext :call Step_color()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
-nmap <unique> <Plug>ColorStepBack :call Step_color_back()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
-nmap <unique> <Plug>ColorStepReload :call Load_colors()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+if !hasmapto('<Plug>ColorstepPrev')
+    nmap <unique> <F6> <Plug>ColorstepPrev
+endif
+if !hasmapto('<Plug>ColorstepNext')
+    nmap <unique> <F7> <Plug>ColorstepNext
+endif
+if !hasmapto('<Plug>ColorstepReload')
+    nmap <unique> <S-F7> <Plug>ColorstepReload
+endif
+
+nmap <unique> <Plug>ColorstepNext :call Step_color()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepPrev :call Step_color_back()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepReload :call Load_colors()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
