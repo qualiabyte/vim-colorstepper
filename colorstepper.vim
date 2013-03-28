@@ -6,21 +6,21 @@
 " With modifications by _sc_ (2009) and qualiabyte (2012)
 
 function! LoadColors()
-        let g:stepcolors = split(globpath(&rtp,"colors/*.vim"),"\n")
+        let g:step_colors = split(globpath(&rtp,"colors/*.vim"),"\n")
 endfunction
 
 function! StepColorBy( count )
-        if !exists("g:stepcolors")
+        if !exists("g:step_colors")
                 call LoadColors()
         endif
         if exists("g:color_step")
                 let g:color_step += a:count
-                let g:color_step = g:color_step % len(g:stepcolors)
+                let g:color_step = g:color_step % len(g:step_colors)
         else
                 let g:color_step = 0
         endif
-        silent exe 'so ' . g:stepcolors[g:color_step]
-        echo g:stepcolors[g:color_step]
+        silent exe 'so ' . g:step_colors[g:color_step]
+        echo g:step_colors[g:color_step]
 endfunction
 
 function! StepColorNext()
@@ -41,6 +41,6 @@ if !hasmapto('<Plug>ColorstepReload')
     nmap <unique> <S-F7> <Plug>ColorstepReload
 endif
 
-nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
-nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
-nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR> <Bar> :echo g:stepcolors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
