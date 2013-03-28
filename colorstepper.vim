@@ -14,13 +14,12 @@ function! StepColorBy( count )
                 call LoadColors()
         endif
         if exists("g:color_step")
-                let g:color_step += a:count
-                let g:color_step = g:color_step % len(g:step_colors)
+                let g:color_step = (g:color_step + a:count) % len(g:step_colors)
         else
                 let g:color_step = 0
         endif
         silent exe 'so ' . g:step_colors[g:color_step]
-        echo g:step_colors[g:color_step]
+        call PrintColorscheme()
 endfunction
 
 function! StepColorNext()
@@ -29,6 +28,11 @@ endfunction
 
 function! StepColorPrev()
         call StepColorBy( -1 )
+endfunction
+
+function! PrintColorscheme()
+        redraw
+        echo g:step_colors[g:color_step]
 endfunction
 
 if !hasmapto('<Plug>ColorstepPrev')
@@ -41,6 +45,6 @@ if !hasmapto('<Plug>ColorstepReload')
     nmap <unique> <S-F7> <Plug>ColorstepReload
 endif
 
-nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
-nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
-nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR> <Bar> :echo g:step_colors[g:color_step]<CR>
+nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR>
+nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR>
+nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR>
