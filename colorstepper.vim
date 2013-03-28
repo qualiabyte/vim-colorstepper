@@ -9,40 +9,26 @@ function! Load_colors()
         let g:stepcolors = split(globpath(&rtp,"colors/*.vim"),"\n")
 endfunction
 
-function! Step_color()
+function! Step_color_by( count )
         if !exists("g:stepcolors")
                 call Load_colors()
         endif
-        let mycolors = g:stepcolors
         if exists("g:color_step")
-                let g:color_step += 1
-                if g:color_step > len(mycolors) - 1
-                        let g:color_step = 0
-                endif
+                let g:color_step += a:count
+                let g:color_step = g:color_step % len(g:stepcolors)
         else
                 let g:color_step = 0
         endif
-        silent exe 'so ' . mycolors[g:color_step]
+        silent exe 'so ' . g:stepcolors[g:color_step]
         echo g:stepcolors[g:color_step]
-        unlet mycolors
+endfunction
+
+function! Step_color()
+        call Step_color_by( 1 )
 endfunction
 
 function! Step_color_back()
-        if !exists("g:stepcolors")
-                call Load_colors()
-        endif
-        let mycolors = g:stepcolors
-        if exists("g:color_step")
-                let g:color_step -= 1
-                if g:color_step < 0
-                        let g:color_step = len(mycolors) - 1
-                endif
-        else
-                let g:color_step = 5
-        endif
-        silent exe 'so ' . mycolors[g:color_step]
-        echo g:stepcolors[g:color_step]
-        unlet mycolors
+        call Step_color_by( -1 )
 endfunction
 
 if !hasmapto('<Plug>ColorstepPrev')
