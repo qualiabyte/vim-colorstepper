@@ -18,7 +18,7 @@ function! StepColorBy( count )
         else
                 let g:color_step = 0
         endif
-        silent exe 'so ' . g:step_colors[g:color_step]
+        silent exe 'colorscheme ' . split(g:step_colors[g:color_step], '/')[-1][:-5]
         call PrintColorscheme()
 endfunction
 
