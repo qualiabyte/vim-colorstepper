@@ -45,6 +45,19 @@ if !hasmapto('<Plug>ColorstepReload')
     nmap <unique> <S-F7> <Plug>ColorstepReload
 endif
 
-nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR>
-nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR>
-nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR>
+" Make sure ColorStepper doesn't throw an error if script is reloaded or maps
+" exist.
+try
+    nmap <unique> <Plug>ColorstepNext :call StepColorNext()<CR>
+catch /^Vim\%((\a\+)\)\=:E227/
+endtry
+
+try
+    nmap <unique> <Plug>ColorstepPrev :call StepColorPrev()<CR>
+catch /^Vim\%((\a\+)\)\=:E227/
+endtry
+
+try
+    nmap <unique> <Plug>ColorstepReload :call LoadColors()<CR>
+catch /^Vim\%((\a\+)\)\=:E227/
+endtry
